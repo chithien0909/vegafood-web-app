@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <!--<router-view/>-->
     <HeaderComponent/>
-    <slider-component/>
+    <router-view/>
+    <FooterComponent/>
   </div>
 </template>
 <script>
     import HeaderComponent from './components/HeaderComponent/HeaderComponent';
-    import SliderComponent from './components/slider/slider';
+    import FooterComponent from  './components/FooterComponent/FooterComponent';
   export default {
   components:{
     HeaderComponent,
-    SliderComponent
+    FooterComponent,
   },
   name: 'App'
 }
