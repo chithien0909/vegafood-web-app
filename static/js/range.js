@@ -1,6 +1,6 @@
 (function() {
 
-  var parent = document.querySelector(".range-slider");
+  var parent = document.querySelector(".range-SliderComponent");
   if(!parent) return;
 
   var

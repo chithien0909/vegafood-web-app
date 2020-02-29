@@ -30,21 +30,29 @@
 
           <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'HomeComponent' }">Home</router-link></li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                  <a class="dropdown-item" href="shop.html">Shop</a>
-                  <a class="dropdown-item" href="wishlist.html">Wishlist</a>
-                  <a class="dropdown-item" href="product-single.html">Single Product</a>
-                  <a class="dropdown-item" href="cart.html">Cart</a>
-                  <a class="dropdown-item" href="checkout.html">Checkout</a>
+                  <router-link class="dropdown-item" :to="{ name: 'ShopComponent' }">Shop</router-link>
+                  <router-link class="dropdown-item" :to="{ name: 'WishlistComponent' }">Wishlist</router-link>
+                  <router-link class="dropdown-item" :to="{ name: 'ProductSingleComponent' }">Single Product</router-link>
+                  <router-link class="dropdown-item" :to="{ name: 'CartComponent' }">Cart</router-link>
+                  <router-link class="dropdown-item" :to="{ name: 'CheckoutComponent' }">Checkout</router-link>
                 </div>
               </li>
-              <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-              <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-              <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'AboutComponent' }">About</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'BlogComponent' }">Blog</router-link></li>
+              <li class="nav-item"><router-link class="nav-link" :to="{ name: 'ContactComponent' }">Contact</router-link></li>
+              <li class="nav-item cta cta-colored"><a class="nav-link"><span class="icon-shopping_cart"></span>[0]<router-link :to="{ name: 'CartComponent' }">Cart</router-link></a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style="width: 12px; height: 12px" src="/static/images/user.png"></a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                  <router-link class="dropdown-item" :to="{ name: 'LoginComponent' }">Login</router-link>
+                  <router-link class="dropdown-item" :to="{ name: 'RegisterComponent' }">Register</router-link>
+                  <!--<router-link class="dropdown-item" :to="{ name: 'DashboardComponent' }">admin</router-link>-->
+                </div>
+              </li>
 
             </ul>
           </div>

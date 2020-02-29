@@ -1,0 +1,63 @@
+.sub__dropdown {
+  position: absolute;
+  z-index: 9999;
+  min-width: 250px;
+  background: #fff;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  transform-origin: left top;
+  top: calc(100% + 20px);
+  opacity: 0;
+  visibility: hidden;
+  left: 0;
+}
+.sub__dropdown:before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  top: -3px;
+  left: 4px;
+  position: absolute;
+  transform: rotate(45deg);
+  z-index: -99999;
+}
+
+.noti__item:hover .sub__dropdown {
+  opacity: 1;
+  visibility: initial;
+}
+
+.sub__profile {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 180px;
+  height: max-content;
+  background: #fff;
+  opacity: 0;
+  visibility: hidden;
+}
+.sub__profile .list__profile {
+  list-style: none;
+  width: 100%;
+  height: auto;
+}
+.sub__profile li {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.sub__profile li:hover {
+  background: #ccc;
+}
+
+.active {
+  opacity: 1;
+  visibility: initial;
+}
+
+/*# sourceMappingURL=headeradmin.css.map */

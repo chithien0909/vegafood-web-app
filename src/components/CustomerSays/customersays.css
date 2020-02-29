@@ -1,0 +1,9 @@
+.owl-carousel .owl-dots span {
+  text-indent: -9999px;
+  z-index: -9999;
+  position: absolute;
+  top: -5px;
+  left: -7px;
+}
+
+/*# sourceMappingURL=customersays.css.map */
