@@ -19,6 +19,7 @@
   import TypeVegetablesComponent from '../TypeVegetablesComponent/TypeVegetablesComponent.vue';
   import OurProductsComponent from '../OurProductsComponent/OurProductsComponent.vue';
   import BestPriceComponent from '../BestPriceComponent/BestPriceComponent.vue';
+  import HeaderComponent from '../HeaderComponent/HeaderComponent.vue';
   export default {
     components:{
       SliderComponent,
@@ -28,7 +29,8 @@
       InfoPageComponent,
       TypeVegetablesComponent,
       OurProductsComponent,
-      BestPriceComponent
+      BestPriceComponent,
+      HeaderComponent,
     }
   }
 </script>

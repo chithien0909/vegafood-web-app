@@ -129,15 +129,15 @@
 </template>
 
 <script>
-  import HeaderAdminComponent from './components/HeaderAdminComponent/HeaderAdminComponent';
-  import SideBarComponent from './components/SideBarComponent/SideBarComponent';
-  import CopyrightComponent from './components/CopyrightComponent/CopyrightComponent';
-export default {
-  components:{
-    HeaderAdminComponent,
-    SideBarComponent,
-    CopyrightComponent,
-  },
-  name: 'App'
-}
+  import HeaderAdminComponent from './admin/components/HeaderAdminComponent/HeaderAdminComponent.vue';
+  import SideBarComponent from './admin/components/SideBarComponent/SideBarComponent';
+  import CopyrightComponent from './admin/components/CopyrightComponent/CopyrightComponent';
+  export default {
+    components:{
+      HeaderAdminComponent,
+      SideBarComponent,
+      CopyrightComponent,
+    },
+    name: 'App'
+  }
 </script>
