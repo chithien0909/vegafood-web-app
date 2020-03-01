@@ -6,6 +6,7 @@
     <OurProductsComponent/>
     <BestPriceComponent/>
     <CustomerSays/>
+    <hr>
     <LogoComponent/>
     <SubcribeComponent/>
   </div>

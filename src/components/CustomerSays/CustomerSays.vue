@@ -87,7 +87,6 @@
         </div>
       </div>
     </section>
-    <hr>
   </div>
 </template>
 <script>
