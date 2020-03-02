@@ -35,6 +35,7 @@ export default new Router({
       children: [
         {
           path: '/',
+          name:'HomeComponent',
           component: HomeComponent
         },
         {
@@ -98,30 +99,37 @@ export default new Router({
       children: [
         {
           path: '/',
-          component: DashboardComponent
+          exact: true,
+          component: DashboardComponent,
+          name: 'DashboardComponent'
         },
         {
-          path: '/chart',
+          path: 'chart',
+          exact: true,
           name: 'ChartComponent',
           component: ChartComponent
         },
         {
-          path: '/products',
+          path: 'products',
+          exact: true,
           name: 'ProductsTableComponent',
           component: ProductsTableComponent
         },
         {
-          path: '/users',
+          path: 'users',
+          exact: true,
           name: 'UsersTableComponent',
           component: UsersTableComponent
         },
         {
-          path: '/orders',
+          path: 'orders',
+          exact: true,
           name: 'OrderTableComponent',
           component: OrderTableComponent
         },
         {
-          path: '/messenger',
+          path: 'messenger',
+          exact: true,
           name: 'MessengerComponent',
           component: MessengerComponent
         },

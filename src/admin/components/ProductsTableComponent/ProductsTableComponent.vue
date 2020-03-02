@@ -69,7 +69,7 @@
               <td>Vegetable banana</td>
               <td>vegetable</td>
               <td>
-                <img style="width: 60px;height: 60px;" src="/static/images/bg-title-01.jpg">
+                <img style="width: 60px;height: 60px;" src="/static/static_admin/images/bg-title-01.jpg">
               </td>
               <td class="desc">Samsung S8 Black</td>
               <!--<td>2018-09-27 02:12</td>-->

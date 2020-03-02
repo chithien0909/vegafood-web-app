@@ -17,7 +17,7 @@
                   <div class="sub__dropdown sub">
                     <div class="mess__item">
                       <div class="image img-cir img-40">
-                        <img src="/static/images/icon/avatar-06.jpg" alt="Michelle Moreno">
+                        <img src="/static/static_admin/images/icon/avatar-06.jpg" alt="Michelle Moreno">
                       </div>
                       <div class="content">
                         <h6>Michelle Moreno</h6>
@@ -37,7 +37,7 @@
                   <div class="sub__dropdown sub">
                     <div class="mess__item">
                       <div class="image img-cir img-40">
-                        <img src="/static/images/icon/avatar-06.jpg" alt="Michelle Moreno">
+                        <img src="/static/static_admin/images/icon/avatar-06.jpg" alt="Michelle Moreno">
                       </div>
                       <div class="content">
                         <h6>Michelle Moreno</h6>
@@ -73,7 +73,7 @@
               <div class="account-wrap position-relative">
                 <div class="account-item clearfix js-item-menu">
                   <div class="image">
-                    <img style="border-radius: 100%;" src="/static/images/icon/avatar-01.jpg" alt="John Doe" />
+                    <img style="border-radius: 100%;" src="/static/static_admin/images/icon/avatar-01.jpg" alt="John Doe" />
                   </div>
                   <div  @click="show()" class="content">
                     <a class="js-acc-btn">john doe</a>

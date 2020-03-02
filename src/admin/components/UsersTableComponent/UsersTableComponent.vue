@@ -78,7 +78,7 @@
               <tr>
                 <td>
                   <label class="au-checkbox">
-                    <input type="checkbox" checked="checked">
+                    <input type="checkbox">
                     <span class="au-checkmark"></span>
                   </label>
                 </td>
@@ -207,9 +207,9 @@
 </template>
 
 <script>
-    export default {
-        name: "UsersTableComponent"
-    }
+  export default {
+    name: "UsersTableComponent"
+  }
 </script>
 
 <style>
