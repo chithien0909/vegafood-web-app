@@ -20,8 +20,12 @@ import ProductsTableComponent from "../admin/components/ProductsTableComponent/P
 import UsersTableComponent from "../admin/components/UsersTableComponent/UsersTableComponent.vue";
 import OrderTableComponent from "../admin/components/OrderTableComponent/OrderTableComponent.vue";
 import MessengerComponent from "../admin/components/MessengerComponent/MessengerComponent.vue";
+import PostComponent from "../admin/components/PostComponent/PostComponent.vue";
 import Admin from "../Admin.vue";
 import App from "../App.vue";
+// import store from "../store/store";
+// import VeeValidate from 'vee-validate';
+// Vue.use(VeeValidate);
 Vue.use(Router);
 
 export default new Router({
@@ -133,7 +137,14 @@ export default new Router({
           name: 'MessengerComponent',
           component: MessengerComponent
         },
+        {
+          path: 'post',
+          exact: true,
+          name: 'PostComponent',
+          component: PostComponent
+        },
       ],
     }
   ],
 })
+

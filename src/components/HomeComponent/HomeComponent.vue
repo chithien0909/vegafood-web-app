@@ -32,7 +32,7 @@
       OurProductsComponent,
       BestPriceComponent,
       HeaderComponent,
-    }
+    },
   }
 </script>
 <style>
