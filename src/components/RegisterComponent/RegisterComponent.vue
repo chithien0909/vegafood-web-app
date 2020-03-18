@@ -6,13 +6,30 @@
           <div class="card card-signin my-5">
             <div class="card-body">
               <h5 class="card-title text-center">Register Account</h5>
-              <form class="form-signin">
+              <div v-if="status" class="alert alert-success">
+                {{status}}
+              </div>
+              <div v-if="error" class="alert alert-danger">
+                {{error}}
+              </div>
+              <form @submit.prevent="submit" class="form-signin">
+               <div class="d-flex">
+                 <div class="form-label-group pr-2">
+                   <input v-model="first_name" type="text" id="first_name" class="form-control" placeholder="first name" required autofocus>
+                   <!--<label for="inputEmail">Email address</label>-->
+                 </div>
+                 <div class="form-label-group pl-2">
+                   <input v-model="last_name" type="text" id="last_name" class="form-control" placeholder="last name" required autofocus>
+                   <!--<label for="inputEmail">Email address</label>-->
+                 </div>
+               </div>
                 <div class="form-label-group">
-                  <input type="text" id="inputName" class="form-control" placeholder="Name" required autofocus>
+                  <input v-model="username" type="text" id="inputName" class="form-control" placeholder="Name" required autofocus>
+                  <!--<p>{{$v}}</p>-->
                   <!--<label for="inputEmail">Email address</label>-->
                 </div>
                 <div class="form-label-group">
-                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                  <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                   <!--<label for="inputEmail">Email address</label>-->
                 </div>
 
@@ -22,7 +39,7 @@
                   <!--<label for="inputPassword">Password</label>-->
                 </div>
                 <div class="form-label-group">
-                  <input type="password" id="re-inputPassword" class="form-control" placeholder="Repeat Password" required>
+                  <input v-model="password_confirmation" type="password" id="re-inputPassword" class="form-control" placeholder="Repeat Password" required>
                   <!--<label for="inputPassword">Password</label>-->
                 </div>
 
@@ -30,9 +47,8 @@
                   <input type="checkbox" class="custom-control-input" id="customCheck1">
                   <label class="custom-control-label" for="customCheck1">i accept terms and conditions</label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" @click.prevent="register()">Register</button>
                 <hr class="my-4">
-
               </form>
               <p class="loginhere">
                 Have already an account ? <a href="#" class="loginhere-link">Login here</a>
@@ -46,20 +62,51 @@
 </template>
 
 <script>
-    export default {
-        name: "RegisterComponent",
-        data(){
+  // import { required, minLength, maxLength, between } from 'vuelidate/lib/validators';
+
+  export default {
+      name: "RegisterComponent",
+      data(){
           return{
             password:'',
-            passwordType:'password'
+            passwordType:'password',
+            password_confirmation: '',
+            first_name:'',
+            last_name:'',
+            username:'',
+            email:'',
           };
-        },
+      },
+
+      // validations: {
+      //   username: {
+      //     required
+      //   }
+      // },
+      computed:{
+          status(){
+            return this.$store.getters.status;
+          },
+          error(){
+            return this.$store.getters.error;
+        }
+      },
       methods:{
         show(){
-          let type = (this.passwordType === 'password') ? 'text' : 'password';
-          this.passwordType = type;
+          this.passwordType = (this.passwordType === 'password') ? 'text' : 'password';
+        },
+        register(){
+            this.$store.dispatch('register', {
+            first_name: this.first_name,
+            last_name: this.last_name,
+            username: this.username,
+            email:this.email,
+            password: this.password,
+              status: this.status,
+          });
         }
-      }
+      },
+
     }
 
 </script>

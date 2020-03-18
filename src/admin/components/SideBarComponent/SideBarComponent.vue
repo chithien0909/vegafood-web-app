@@ -18,6 +18,14 @@
             <router-link :to="{ name: 'ProductsTableComponent' }"><a class="nav-link"><i class="fa fa-archive"></i>Products</a></router-link>
           </li>
           <li>
+            <router-link :to="{ name: 'PostComponent' }"><a class="nav-link"><i class="fa fa-newspaper-o"></i>Posts</a></router-link>
+            <ul class="list-group list-group-flush">
+              <router-link :to="{ name: 'PostComponent' }"> <li class="list-item p-2">All Posts</li></router-link>
+              <router-link :to="{ name: 'PostComponent' }"> <li class="list-item p-2">Add New</li></router-link>
+              <router-link :to="{ name: 'PostComponent' }"> <li class="list-item p-2">Categories</li></router-link>
+            </ul>
+          </li>
+          <li>
             <router-link :to="{ name: 'UsersTableComponent' }"><a class="nav-link"><i class="fa fa-user"></i>Users</a></router-link>
           </li>
           <li>

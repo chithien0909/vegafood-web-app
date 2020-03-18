@@ -48,8 +48,11 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style="width: 12px; height: 12px" src="/static/images/user.png"></a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                  <router-link class="dropdown-item" :to="{ name: 'LoginComponent' }">Login</router-link>
-                  <router-link class="dropdown-item" :to="{ name: 'RegisterComponent' }">Register</router-link>
+                  <div style="cursor: pointer" v-if="isLogin" class="dropdown-item" @click="logout()">Logout</div>
+                  <div v-else>
+                    <router-link class="dropdown-item" :to="{ name: 'LoginComponent' }">Login</router-link>
+                    <router-link class="dropdown-item" :to="{ name: 'RegisterComponent' }">Register</router-link>
+                  </div>
                   <!--<router-link class="dropdown-item" :to="{ name: 'DashboardComponent' }">admin</router-link>-->
                 </div>
               </li>
@@ -62,6 +65,18 @@
 </template>
 <script>
   export default {
-
+    computed:{
+      isLogin(){
+        return this.$store.getters.isLogin;
+      }
+    },
+    methods:{
+      logout(){
+        this.$store.dispatch("logout")
+          .then(()=> {
+            this.$router.push("/login");
+          })
+      }
+    }
   }
 </script>
