@@ -13,30 +13,34 @@
                 {{error}}
               </div>
               <form @submit.prevent="submit" class="form-signin">
-               <div class="d-flex">
-                 <div class="form-label-group pr-2">
-                   <input v-model="first_name" type="text" id="first_name" class="form-control" placeholder="first name" required autofocus>
-                   <!--<label for="inputEmail">Email address</label>-->
-                 </div>
-                 <div class="form-label-group pl-2">
-                   <input v-model="last_name" type="text" id="last_name" class="form-control" placeholder="last name" required autofocus>
-                   <!--<label for="inputEmail">Email address</label>-->
-                 </div>
-               </div>
-                <div class="form-label-group">
-                  <input v-model="username" type="text" id="inputName" class="form-control" placeholder="Name" required autofocus>
-                  <!--<p>{{$v}}</p>-->
-                  <!--<label for="inputEmail">Email address</label>-->
+                <div class="form-label-group" >
+                  <input
+                    @blur="$v.username.$touch()"
+                    v-model="username"
+                    type="text" id="inputName"
+                    class="form-control"
+                    :class="{invalid: $v.username.$error}"
+                    placeholder="Username"
+                    >
+                  <p class="text-error" v-if="$v.username.$error" for="inputEmail">* Username is required</p>
                 </div>
                 <div class="form-label-group">
-                  <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                  <!--<label for="inputEmail">Email address</label>-->
+                  <input
+                    v-model="email"
+                    type="email"
+                    id="inputEmail"
+                    @blur="$v.email.$touch()"
+                    class="form-control"
+                    :class="{invalid: $v.email.$error}"
+                    placeholder="Email address"
+                    >
+                    <p class="text-error" v-if="$v.email.$error" for="inputEmail">* Email is required</p>
                 </div>
 
                 <div class="form-label-group">
                   <input :type="passwordType" v-model="password" id="inputPassword" class="form-control position-relative" placeholder="Password" required>
                   <img @click="show" class="hide" id="hidden" src="/static/images/hide.png">
-                  <!--<label for="inputPassword">Password</label>-->
+                  <p class="text-error" v-if="!matchPassword" for="inputEmail">* Password is not matched</p>
                 </div>
                 <div class="form-label-group">
                   <input v-model="password_confirmation" type="password" id="re-inputPassword" class="form-control" placeholder="Repeat Password" required>
@@ -62,7 +66,7 @@
 </template>
 
 <script>
-  // import { required, minLength, maxLength, between } from 'vuelidate/lib/validators';
+  import { required, minLength, maxLength, between } from 'vuelidate/dist/validators.min';
 
   export default {
       name: "RegisterComponent",
@@ -71,25 +75,29 @@
             password:'',
             passwordType:'password',
             password_confirmation: '',
-            first_name:'',
-            last_name:'',
             username:'',
             email:'',
           };
       },
 
-      // validations: {
-      //   username: {
-      //     required
-      //   }
-      // },
+      validations: {
+        username: {
+          required
+        },
+        email: {
+          required
+        }
+      },
       computed:{
           status(){
             return this.$store.getters.status;
           },
           error(){
             return this.$store.getters.error;
-        }
+          },
+          matchPassword() {
+            return this.password === this.password_confirmation;
+          }
       },
       methods:{
         show(){
@@ -97,12 +105,9 @@
         },
         register(){
             this.$store.dispatch('register', {
-            first_name: this.first_name,
-            last_name: this.last_name,
             username: this.username,
             email:this.email,
-            password: this.password,
-              status: this.status,
+            password: this.password
           });
         }
       },
@@ -113,4 +118,11 @@
 
 <style lang="css">
   @import "./register.css";
+  .invalid {
+    border: 1px solid red;
+  }
+  .text-error {
+    color: red;
+    padding-left: 15px;
+  }
 </style>

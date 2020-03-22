@@ -36,25 +36,24 @@
 </template>
 
 <script>
-    export default {
-        name: "LoginComponent",
-        data(){
-          return{
-            email:'',
-            password:'',
-          }
-        },
-      methods:{
-         login(){
-          this.$store.dispatch('login', {
-            email: this.email,
-            password: this.password,
-          }).then(() => this.$router.push("/"))
-            .catch(err => err)
-        }
-      },
+  export default {
+    name: "LoginComponent",
+    data(){
+      return{
+        email:'',
+        password:'',
+      }
+    },
+    methods:{
+       login(){
+        this.$store.dispatch('login', {
+          email: this.email,
+          password: this.password,
+        });
+      }
+    },
 
-    }
+  }
 </script>
 
 <style lang="css" scoped>
