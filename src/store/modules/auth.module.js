@@ -16,11 +16,9 @@ const getters = {
   error(state){
     return state.err;
   },
-  isLogin: state => !!state.token,
-  getToken(state) {
-    state.token = localStorage.getItem('token');
-    return state.token;
-  }
+  user(state){
+    return state.user;
+  },
 };
 
 const mutations = {
@@ -31,6 +29,7 @@ const mutations = {
     state.err = err;
   },
   SET_TOKEN(state, token){
+    state.token = token;
     axios.defaults.headers.common['Authorization'] = token;
     localStorage.setItem('token', token);
   },
@@ -42,15 +41,16 @@ const mutations = {
   LOGOUT(state){
     state.status = '';
     state.token = '';
-    // delete axios.defaults.headers.common['Authorization'];
+    state.user = {};
+    localStorage.setItem('token', '');
+    delete axios.defaults.headers.common['Authorization'];
   },
-  CURRENT_USER(state, user){
+  SET_USER(state, user){
     state.user = user;
   }
 };
 
 const actions = {
-
   login({dispatch, commit}, payload){
     axios.post('/auth/login', payload)
       .then(response => response.data)
@@ -60,6 +60,7 @@ const actions = {
           expire: result.expire
         });
         commit('SET_TOKEN', result.token);
+        dispatch('directHome');
         dispatch('currentUser');
       })
       .catch(err => console.log(err.message))
@@ -83,19 +84,30 @@ const actions = {
     localStorage.removeItem('token');
     commit('LOGOUT');
   },
-  currentUser({dispatch, commit}){
-    console.log(localStorage.getItem('token'));
+  currentUser({state, dispatch, commit}){
+    dispatch('getToken');
+    if(!state.token){
+      return;
+    }
     axios.get('/auth/current-user')
-      .then(res => {
-        console.log(res);
+      .then(response => response.data)
+      .then(result => {
+        commit('SET_USER', result.data);
       })
       .catch(err => {
         const error = err.response.data.message;
-        console.log(error);
-      })
+      });
+  },
+  getToken({commit}) {
+    const token = localStorage.getItem('token');
+    if(token){
+      commit('SET_TOKEN', token);
+    }
+  },
+  isAuth({state}){
+    return state.user;
   }
 };
-
 export default {
   state,
   getters,

@@ -1,17 +1,20 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Vuelidate from 'vuelidate';
 import Main from './Main'
 import router from './router';
 import {store} from './store/store';
-import '@babel/polyfill';
+import Router from 'vue-router';
+// import '@babel/polyfill';
 Vue.config.productionTip = true;
 Vue.use(Vuelidate);
+Vue.use(Router);
 new Vue({
   el: '#app',
   router,
   store,
   components: { Main },
-  template: '<Main/>'
+  template: '<Main/>',
+  created(){
+    store.dispatch('currentUser');
+  }
 });

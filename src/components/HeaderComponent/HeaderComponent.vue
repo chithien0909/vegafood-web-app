@@ -23,7 +23,8 @@
       </div>
       <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-          <a class="navbar-brand" href="index.html">Vegefoods</a>
+          <router-link class="navbar-brand" :to="{ name: 'HomeComponent' }">Vegefoods</router-link>
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
           </button>
@@ -48,12 +49,14 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style="width: 12px; height: 12px" src="/static/images/user.png"></a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                  <div style="cursor: pointer" v-if="isLogin" class="dropdown-item" @click="logout()">Logout</div>
+                  <div  v-if="hasPermission">
+                    <router-link class="dropdown-item" :to="{ name: 'Admin' }" >User: {{user.username}}</router-link>
+                    <div style="cursor: pointer" class="dropdown-item" @click="logout">Logout</div>
+                  </div>
                   <div v-else>
                     <router-link class="dropdown-item" :to="{ name: 'LoginComponent' }">Login</router-link>
                     <router-link class="dropdown-item" :to="{ name: 'RegisterComponent' }">Register</router-link>
                   </div>
-                  <!--<router-link class="dropdown-item" :to="{ name: 'DashboardComponent' }">admin</router-link>-->
                 </div>
               </li>
 
@@ -66,8 +69,11 @@
 <script>
   export default {
     computed:{
-      isLogin(){
-        return this.$store.getters.isLogin;
+      hasPermission(){
+        return Object.keys(this.$store.getters.user).length > 0;
+      },
+      user() {
+        return this.$store.getters.user;
       }
     },
     methods:{

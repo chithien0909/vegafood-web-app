@@ -1,39 +1,35 @@
-import Vue from 'vue'
 import Router from 'vue-router'
-import HomeComponent from '@/components/HomeComponent/HomeComponent';
-import ShopComponent from '@/components/ShopComponent/ShopComponent'
-import WishlistComponent from '@/components/WishlistComponent/WishlistComponent.vue';
-import ProductSingleComponent from '@/components/ProductSingleComponent/ProductSingleComponent.vue';
-import CartComponent from '@/components/CartComponent/CartComponent.vue';
-import CheckoutComponent from '@/components/CheckoutComponent/CheckoutComponent.vue';
-import AboutComponent from '@/components/AboutComponent/AboutComponent.vue';
-import ContactComponent from '@/components/ContactComponent/ContactComponent.vue';
-import BlogComponent from '@/components/BlogComponent/BlogComponent.vue';
-import LoginComponent from '@/components/LoginComponent/LoginComponent.vue';
-import RegisterComponent from '@/components/RegisterComponent/RegisterComponent.vue';
+const HomeComponent = () => import('@/components/HomeComponent/HomeComponent');
+const ShopComponent = () => import('@/components/ShopComponent/ShopComponent');
+const WishlistComponent = () => import('@/components/WishlistComponent/WishlistComponent.vue');
+const ProductSingleComponent = () => import('@/components/ProductSingleComponent/ProductSingleComponent.vue');
+const CartComponent = () => import('@/components/CartComponent/CartComponent.vue');
+const CheckoutComponent = () => import('@/components/CheckoutComponent/CheckoutComponent.vue');
+const AboutComponent = () => import('@/components/AboutComponent/AboutComponent.vue');
+const ContactComponent = () => import('@/components/ContactComponent/ContactComponent.vue');
+const BlogComponent = () => import('@/components/BlogComponent/BlogComponent.vue');
+const LoginComponent = () => import('@/components/LoginComponent/LoginComponent.vue');
+const RegisterComponent = () => import('@/components/RegisterComponent/RegisterComponent.vue');
 
 //Admin import
-import DashboardComponent from "../admin/components/DashboardComponent/DashboardComponent.vue";
-import ChartComponent from "../admin/components/ChartComponent/ChartComponent.vue";
-import ProductsTableComponent from "../admin/components/ProductsTableComponent/ProductsTableComponent.vue";
-import UsersTableComponent from "../admin/components/UsersTableComponent/UsersTableComponent.vue";
-import OrderTableComponent from "../admin/components/OrderTableComponent/OrderTableComponent.vue";
-import MessengerComponent from "../admin/components/MessengerComponent/MessengerComponent.vue";
-import PostComponent from "../admin/components/PostComponent/PostComponent.vue";
-import Admin from "../Admin.vue";
-import App from "../App.vue";
-// import store from "../store/store";
-// import VeeValidate from 'vee-validate';
-// Vue.use(VeeValidate);
-Vue.use(Router);
+const DashboardComponent = () => import("../admin/components/DashboardComponent/DashboardComponent.vue");
+const ChartComponent = () => import("../admin/components/ChartComponent/ChartComponent.vue");
+const ProductsTableComponent = () => import("../admin/components/ProductsTableComponent/ProductsTableComponent.vue");
+const UsersTableComponent = () => import("../admin/components/UsersTableComponent/UsersTableComponent.vue");
+const OrderTableComponent = () => import("../admin/components/OrderTableComponent/OrderTableComponent.vue");
+const MessengerComponent = () => import("../admin/components/MessengerComponent/MessengerComponent.vue");
+const PostComponent  = () => import("../admin/components/PostComponent/PostComponent.vue");
+const Admin = () => import("../Admin.vue");
+const App = () => import("../App.vue");
 
-export default new Router({
+import {store} from '../store/store';
+
+const router = new Router({
   mode:'history',
   routes: [
     {
       path: '/',
       exact: true,
-      name: 'App',
       component: App,
       children: [
         {
@@ -84,7 +80,7 @@ export default new Router({
         {
           path:'/login',
           name:'LoginComponent',
-          component:LoginComponent,
+          component:LoginComponent
         },
 
         {
@@ -145,5 +141,17 @@ export default new Router({
       ],
     }
   ],
-})
-
+});
+router.beforeEach(async (to, from, next) => {
+  console.log(to.name);
+  if(to.name === "LoginComponent" || to.name === "RegisterComponent"){
+    const isAuth = store.dispatch('isAuth');
+    if(isAuth){
+      next({name: "HomeComponent"})
+    } else {
+      next();
+    }
+  }
+  next();
+});
+export default router;

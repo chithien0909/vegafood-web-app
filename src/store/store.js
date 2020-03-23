@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import axios from 'axios'
-// import VueAxios from 'vue-axios'
-import axios from './api';
 import authModule from './modules/auth.module';
 import router from '../router/index';
 Vue.use(Vuex);
@@ -12,6 +9,7 @@ export const store = new Vuex.Store({
   getters:{
   },
   mutations:{
+
   },
   actions:{
     directHome(){
