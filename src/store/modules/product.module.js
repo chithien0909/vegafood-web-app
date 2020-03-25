@@ -2,7 +2,6 @@ import axios from "../api";
 const state = {
   products:[],
   carts: [],
-  badge:'0',
   qty: 1,
 };
 const getters = {
