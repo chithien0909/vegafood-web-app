@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import authModule from './modules/auth.module';
+import productModule from './modules/product.module';
 import router from '../router/index';
 Vue.use(Vuex);
 export const store = new Vuex.Store({
@@ -26,6 +27,9 @@ export const store = new Vuex.Store({
   modules: {
     auth: {
       ...authModule,
+    },
+    product:{
+      ...productModule,
     }
   }
 });
