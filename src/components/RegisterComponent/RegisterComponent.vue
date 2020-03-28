@@ -44,7 +44,6 @@
                 </div>
                 <div class="form-label-group">
                   <input v-model="password_confirmation" type="password" id="re-inputPassword" class="form-control" placeholder="Repeat Password" required>
-                  <!--<label for="inputPassword">Password</label>-->
                 </div>
 
                 <div class="custom-control custom-checkbox mb-3">

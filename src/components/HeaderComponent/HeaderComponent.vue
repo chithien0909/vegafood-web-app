@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+      <nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
         <div class="container">
           <router-link class="navbar-brand" :to="{ name: 'HomeComponent' }">Vegefoods</router-link>
 
@@ -78,9 +78,9 @@
     },
     methods:{
       logout(){
-        this.$store.dispatch("logout")
+        this.$store.dispatch("LOGOUT")
           .then(()=> {
-            this.$router.push("/login");
+            this.$router.push({name: "HomeComponent"});
           })
       }
     }

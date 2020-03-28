@@ -3,8 +3,9 @@ import Vuex from 'vuex'
 import authModule from './modules/auth.module';
 import router from '../router/index';
 Vue.use(Vuex);
-export const store = new Vuex.Store({
+export default new Vuex.Store({
   state:{
+    auth: "123"
   },
   getters:{
   },

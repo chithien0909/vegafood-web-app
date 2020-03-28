@@ -22,7 +22,7 @@ const PostComponent  = () => import("../admin/components/PostComponent/PostCompo
 const Admin = () => import("../Admin.vue");
 const App = () => import("../App.vue");
 
-import {store} from '../store/store';
+import store from '../stores/store';
 
 const router = new Router({
   mode:'history',
@@ -80,7 +80,7 @@ const router = new Router({
         {
           path:'/login',
           name:'LoginComponent',
-          component:LoginComponent
+          component:LoginComponent,
         },
 
         {
@@ -95,6 +95,10 @@ const router = new Router({
       exact: true,
       name: 'Admin',
       component: Admin,
+      meta: {
+        requiresAuth: true,
+        roles: ["admin"]
+      },
       children: [
         {
           path: '/',
@@ -142,16 +146,29 @@ const router = new Router({
     }
   ],
 });
-router.beforeEach(async (to, from, next) => {
-  console.log(to.name);
+
+const handleDirectAuth = async (to, from, next) => {
+  await store.dispatch('currentUser');
   if(to.name === "LoginComponent" || to.name === "RegisterComponent"){
-    const isAuth = store.dispatch('isAuth');
-    if(isAuth){
-      next({name: "HomeComponent"})
+    if(store.state.auth.isLogin){
+      next({name: "HomeComponent"});
     } else {
       next();
     }
   }
+  console.log(to.name);
+  if(to.name === "DashboardComponent" || to.name === "Admin"){
+    if(store.state.auth.user){
+      console.log(store.state.auth.user.roles);
+      if(store.state.auth.user.roles !== "ADMIN"){
+        console.log(store.state.auth.user.roles);
+        next({name: "HomeComponent"});
+      }
+    } else {
+      next({name: "HomeComponent"});
+    }
+  }
   next();
-});
+};
+router.beforeEach(handleDirectAuth);
 export default router;

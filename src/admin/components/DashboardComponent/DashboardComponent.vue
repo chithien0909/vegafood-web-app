@@ -489,7 +489,20 @@
 
 <script>
     export default {
-        name: "DashboardComponent"
+      name: "DashboardComponent",
+      computed: {
+        user(){
+          return this.$store.getters.user;
+        }
+      },
+      created() {
+        if(this.user){
+          if(this.user.roles !== "ADMIN"){
+            // this.$store.dispatch("directHome");
+            this.$router.push('/');
+          }
+        }
+      }
     }
 </script>
 

@@ -16,9 +16,12 @@ const getters = {
   error(state){
     return state.err;
   },
-  user(state){
+  user: (state) => {
     return state.user;
   },
+  isLogin: (state) => {
+    return state.isLogin;
+  }
 };
 
 const mutations = {
@@ -43,10 +46,14 @@ const mutations = {
     state.token = '';
     state.user = {};
     localStorage.setItem('token', '');
+    commit('SET_IS_LOGIN', false);
     delete axios.defaults.headers.common['Authorization'];
   },
   SET_USER(state, user){
     state.user = user;
+  },
+  SET_IS_LOGIN(state, payload){
+    state.isLogin = payload;
   }
 };
 
@@ -82,6 +89,7 @@ const actions = {
   },
   logout({commit}){
     localStorage.removeItem('token');
+    commit('SET_USER', {});
     commit('LOGOUT');
   },
   currentUser({state, dispatch, commit}){
@@ -92,7 +100,9 @@ const actions = {
     axios.get('/auth/current-user')
       .then(response => response.data)
       .then(result => {
-        commit('SET_USER', result.data);
+        const data = result.data;
+        commit('SET_IS_LOGIN', true);
+        commit('SET_USER', data);
       })
       .catch(err => {
         const error = err.response.data.message;
@@ -104,7 +114,7 @@ const actions = {
       commit('SET_TOKEN', token);
     }
   },
-  isAuth({state}){
+  isAuth({state}) {
     return state.user;
   }
 };
