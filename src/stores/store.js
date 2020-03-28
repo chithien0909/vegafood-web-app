@@ -6,9 +6,13 @@ import router from '../router/index';
 Vue.use(Vuex);
 export default new Vuex.Store({
   state:{
-    auth: "123"
+    auth: "123",
+    bashUrlServer: 'http://localhost:3000/'
   },
   getters:{
+    bashUrlServer(state){
+      return state.bashUrlServer;
+    }
   },
   mutations:{
 

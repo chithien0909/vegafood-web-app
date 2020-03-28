@@ -15,19 +15,24 @@
       <div class="row">
         <div v-for="pr in product" :key="pr._id" class="col-md-6 col-lg-3 ftco-animate">
           <div class="product">
-            <a href="#" class="img-prod"><img class="img-fluid" src="/static/images/product-1.jpg" alt="Colorlib Template">
+            <a href="#" class="img-prod"><img class="img-fluid" :src="bashUrlServer + pr.images[0]" alt="Colorlib Template">
               <div v-if="pr.discount">
-                <span class="status">{{pr.discount.price}}%</span>
+                <span class="status">{{calDiscount(pr)}}%</span>
                 <div class="overlay"></div>
               </div>
             </a>
             <div class="text py-3 pb-4 px-3 text-center">
               <h3><a href="#">{{pr.name}}</a></h3>
               <div class="d-flex">
-                <div class="pricing">
+                <div v-if="pr.discount" class="pricing">
                   <p class="price">
-                    <span v-if="pr.discount" class="mr-2 price-dc">${{pr.price * ((100 - (pr.discount.price))/100)}}</span>
-                    <span class="price-sale">${{pr.price}}</span>
+                    <span class="mr-2 price-dc">${{pr.price}}</span>
+                    <span class="price-sale">${{pr.discount.price}}/{{pr.unit}}</span>
+                  </p>
+                </div>
+                <div v-if="!pr.discount" class="pricing">
+                  <p class="price">
+                    <span class="price-sale">${{pr.price}}/{{pr.unit}}</span>
                   </p>
                 </div>
               </div>
@@ -69,14 +74,14 @@
 
 <script>
     export default {
-        name: "ProductComponent",
+      name: "ProductComponent",
       data(){
         return{
           items:{
             productName: this.name,
             productPrice:this.price,
             product_id: this._id,
-          }
+          },
         }
       },
       mounted() {
@@ -86,11 +91,19 @@
        addToCart(){
          this.$store.commit('addToCart', this.items);
        },
+       calDiscount(item){
+         return Number.parseInt((1 - item.discount.price/item.price) * 100)
+       }
      },
       computed:{
         product(){
-          return this.$store.getters.product;
-        }
+          const products  = this.$store.getters.product;
+          console.log(products);
+          return products;
+        },
+        bashUrlServer(){
+          return this.$store.getters.bashUrlServer;
+        },
       }
     }
 </script>
