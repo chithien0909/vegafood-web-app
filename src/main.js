@@ -4,6 +4,7 @@ import Main from './Main'
 import router from './router';
 import {store} from './store/store';
 import Router from 'vue-router';
+
 // import '@babel/polyfill';
 Vue.config.productionTip = true;
 Vue.use(Vuelidate);

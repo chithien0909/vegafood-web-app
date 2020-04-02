@@ -9,7 +9,7 @@
                 <div class="text text-center">
                   <h2>Vegetables</h2>
                   <p>Protect the health of every home</p>
-                  <p><a href="#" class="btn btn-primary">Shop now</a></p>
+                  <p><router-link class="btn btn-primary" :to="{ name: 'ShopComponent' }">Shop now</router-link></p>
                 </div>
               </div>
             </div>

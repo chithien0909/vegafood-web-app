@@ -13,21 +13,21 @@
         </div>
       </div>
       <div class="row">
-        <div v-for="pr in product" :key="pr._id" class="col-md-6 col-lg-3 ftco-animate">
+        <div v-for="product in products" :key="product._id" class="col-md-6 col-lg-3 ftco-animate">
           <div class="product">
             <a href="#" class="img-prod"><img class="img-fluid" src="/static/images/product-1.jpg" alt="Colorlib Template">
-              <div v-if="pr.discount">
-                <span class="status">{{pr.discount.price}}%</span>
+              <div v-if="product.discount">
+                <span class="status">{{product.discount.price}}%</span>
                 <div class="overlay"></div>
               </div>
             </a>
             <div class="text py-3 pb-4 px-3 text-center">
-              <h3><a href="#">{{pr.name}}</a></h3>
+              <h3><a href="#">{{product.name}}</a></h3>
               <div class="d-flex">
                 <div class="pricing">
                   <p class="price">
-                    <span v-if="pr.discount" class="mr-2 price-dc">${{pr.price * ((100 - (pr.discount.price))/100)}}</span>
-                    <span class="price-sale">${{pr.price}}</span>
+                    <span v-if="product.discount" class="mr-2 price-dc">${{product.price * ((100 - (product.discount.price))/100)}}</span>
+                    <span class="price-sale">${{product.price}}</span>
                   </p>
                 </div>
               </div>
@@ -36,7 +36,7 @@
                   <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                     <span><i class="ion-ios-menu"></i></span>
                   </a>
-                  <a style="cursor: pointer" @click="addToCart()" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                  <a style="cursor: pointer" @click="addToCart(product)" class="buy-now d-flex justify-content-center align-items-center mx-1">
                     <span><i class="ion-ios-cart"></i></span>
                   </a>
                   <a href="#" class="heart d-flex justify-content-center align-items-center ">
@@ -66,30 +66,22 @@
     </div>
   </section>
 </template>
-
 <script>
     export default {
         name: "ProductComponent",
-      data(){
-        return{
-          items:{
-            productName: this.name,
-            productPrice:this.price,
-            product_id: this._id,
-          }
-        }
-      },
+      // props:['product'],
       mounted() {
-          return this.$store.dispatch('showProducts');
+          return this.$store.dispatch('fetchProducts');
       },
-     methods:{
-       addToCart(){
-         this.$store.commit('addToCart', this.items);
-       },
-     },
+      methods: {
+        addToCart(product) {
+          this.$store.commit('ADD_TO_CART', product);
+        },
+
+      },
       computed:{
-        product(){
-          return this.$store.getters.product;
+        products(){
+          return this.$store.getters.products;
         }
       }
     }

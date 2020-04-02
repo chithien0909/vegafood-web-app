@@ -45,7 +45,7 @@
               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'AboutComponent' }">About</router-link></li>
               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'BlogComponent' }">Blog</router-link></li>
               <li class="nav-item"><router-link class="nav-link" :to="{ name: 'ContactComponent' }">Contact</router-link></li>
-              <li class="nav-item cta cta-colored"><a class="nav-link"><span class="icon-shopping_cart"></span>[0]<router-link :to="{ name: 'CartComponent' }">Cart</router-link></a></li>
+              <li class="nav-item cta cta-colored"><a class="nav-link"><span class="icon-shopping_cart"></span>[{{getNumberOfProducts}}]<router-link :to="{ name: 'CartComponent' }">Cart</router-link></a></li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style="width: 12px; height: 12px" src="/static/images/user.png"></a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -74,6 +74,9 @@
       },
       user() {
         return this.$store.getters.user;
+      },
+      getNumberOfProducts(){
+        return this.$store.getters.getNumberOfProducts;
       }
     },
     methods:{
@@ -82,7 +85,8 @@
           .then(()=> {
             this.$router.push("/login");
           })
-      }
+      },
+
     }
   }
 </script>
