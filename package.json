@@ -12,7 +12,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
     "@webpack-cli/init": "^0.3.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "icomoon": "^1.0.0",
     "ionicons": "^5.0.0",
     "path": "^0.12.7",
